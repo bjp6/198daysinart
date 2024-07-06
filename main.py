@@ -10,8 +10,8 @@ firmware_url = "https://raw.githubusercontent.com/bjp6/198daysinart/"
 ota_updater = OTAUpdater(SSID, PASSWORD, firmware_url, "main.py")
 ota_updater.download_and_install_update_if_available()
 
-trigger = Pin(3, Pin.OUT)
-echo = Pin(2, Pin.IN)
+"""trigger = Pin(3, Pin.OUT)
+echo = Pin(2, Pin.IN)"""
 
 sda = Pin(0)
 scl = Pin(1)
