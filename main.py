@@ -98,8 +98,6 @@ for i in range (0,180):
     servo.position(index=7, degrees=i)
     servo.position(index=8, degrees=i)
     utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
-
-
   
 """def ultra():
     trigger.low()
