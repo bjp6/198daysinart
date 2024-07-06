@@ -23,7 +23,7 @@ pca = pca9685.PCA9685(i2c=i2c)
 servo = Servos(i2c=i2c)
 
 def enter_zone():
-    c = 0
+    """c = 0
     while c <= 3:
         servo.position(index=0, degrees=130)
         servo.position(index=1, degrees=130)
@@ -34,7 +34,7 @@ def enter_zone():
         servo.position(index=6, degrees=130)
         servo.position(index=7, degrees=130)
         servo.position(index=8, degrees=130)
-        utime.sleep(0.5)
+        utime.sleep(2)
         servo.position(index=0, degrees=45)
         servo.position(index=1, degrees=45)
         servo.position(index=2, degrees=45)
@@ -44,8 +44,8 @@ def enter_zone():
         servo.position(index=6, degrees=45)
         servo.position(index=7, degrees=45)
         servo.position(index=8, degrees=45)
-        utime.sleep(0.5)
-        c = c+1
+        utime.sleep(2)
+        c = c+1"""
         
     servo.position(index=0, degrees=0)
     servo.position(index=1, degrees=0)
@@ -87,15 +87,18 @@ def enter_zone():
     servo.position(index=7, degrees=0)
     servo.position(index=8, degrees=0)"""
     
-"""    for i in range (0,180):
-        servo.position(index=0, degrees=i)
-        servo.position(index=1, degrees=i)
-        servo.position(index=2, degrees=i)
-        servo.position(index=3, degrees=i)
-        servo.position(index=4, degrees=i)
-        servo.position(index=5, degrees=i)
-        utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
-        servo.position(index=0, degrees=0)"""
+for i in range (0,180):
+    servo.position(index=0, degrees=i)
+    servo.position(index=1, degrees=i)
+    servo.position(index=2, degrees=i)
+    servo.position(index=3, degrees=i)
+    servo.position(index=4, degrees=i)
+    servo.position(index=5, degrees=i)
+    servo.position(index=6, degrees=i)
+    servo.position(index=7, degrees=i)
+    servo.position(index=8, degrees=i)
+    utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
+
 
   
 """def ultra():
