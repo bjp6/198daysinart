@@ -98,6 +98,23 @@ for i in range (0,180):
     servo.position(index=7, degrees=i)
     servo.position(index=8, degrees=i)
     utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
+
+utime.sleep(5)
+
+for i in range (180,-1, -1):
+    servo.position(index=0, degrees=i)
+    servo.position(index=1, degrees=i)
+    servo.position(index=2, degrees=i)
+    servo.position(index=3, degrees=i)
+    servo.position(index=4, degrees=i)
+    servo.position(index=5, degrees=i)
+    servo.position(index=6, degrees=i)
+    servo.position(index=7, degrees=i)
+    servo.position(index=8, degrees=i)
+    utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
+
+
+
   
 """def ultra():
     trigger.low()
@@ -119,3 +136,4 @@ for i in range (0,180):
 while True:
     enter_zone()#when ultrasonic sensor is installed this should read ultra()
     utime.sleep(1)
+
