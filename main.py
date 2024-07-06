@@ -97,7 +97,7 @@ def enter_zone():
         utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
         servo.position(index=0, degrees=0)"""
 
-    
+ """   
 def ultra():
     trigger.low()
     utime.sleep_us(2)
@@ -114,7 +114,8 @@ def ultra():
     print("The distance from object is ",distance,"cm")
     if distance < 20:
         enter_zone()
-    
+   """ 
 while True:
-   ultra()
+   """ultra()"""
+    enter_zone()
    utime.sleep(1)
