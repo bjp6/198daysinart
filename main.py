@@ -19,11 +19,7 @@ sda = Pin(0)
 scl = Pin(1)
 id=0
 
-print("Pins defined")
-
 i2c = I2C(id=id, sda=sda, scl=scl)
-
-print("i2c adress accepted")
 
 pca = pca9685.PCA9685(i2c=i2c)
 servo = Servos(i2c=i2c)
@@ -62,8 +58,6 @@ def enter_zone():
     servo.position(index=6, degrees=0)
     servo.position(index=7, degrees=0)
     servo.position(index=8, degrees=0)
-
-    print("servos in position 0")
     
     """servo.position(index=0, degrees=0)
     servo.position(index=1, degrees=0)
@@ -133,8 +127,6 @@ def ultra():
         signalon = utime.ticks_us()
     timepassed = signalon - signaloff
     distance = (timepassed * 0.0343) / 2
-    print(timepassed)
-    print("The distance from object is ",distance,"cm")
     if distance < 150:
         enter_zone()
 
