@@ -24,98 +24,8 @@ i2c = I2C(id=id, sda=sda, scl=scl)
 pca = pca9685.PCA9685(i2c=i2c)
 servo = Servos(i2c=i2c)
 
-def enter_zone():
-    """c = 0
-    while c <= 3:
-        servo.position(index=0, degrees=130)
-        servo.position(index=1, degrees=130)
-        servo.position(index=2, degrees=130)
-        servo.position(index=3, degrees=130)
-        servo.position(index=4, degrees=130)
-        servo.position(index=5, degrees=130)
-        servo.position(index=6, degrees=130)
-        servo.position(index=7, degrees=130)
-        servo.position(index=8, degrees=130)
-        utime.sleep(2)
-        servo.position(index=0, degrees=45)
-        servo.position(index=1, degrees=45)
-        servo.position(index=2, degrees=45)
-        servo.position(index=3, degrees=45)
-        servo.position(index=4, degrees=45)
-        servo.position(index=5, degrees=45)
-        servo.position(index=6, degrees=45)
-        servo.position(index=7, degrees=45)
-        servo.position(index=8, degrees=45)
-        utime.sleep(2)
-        c = c+1"""
-        
-    servo.position(index=0, degrees=0)
-    servo.position(index=1, degrees=0)
-    servo.position(index=2, degrees=0)
-    servo.position(index=3, degrees=0)
-    servo.position(index=4, degrees=0)
-    servo.position(index=5, degrees=0)
-    servo.position(index=6, degrees=0)
-    servo.position(index=7, degrees=0)
-    servo.position(index=8, degrees=0)
-    
-    """servo.position(index=0, degrees=0)
-    servo.position(index=1, degrees=0)
-    servo.position(index=2, degrees=0)
-    servo.position(index=3, degrees=0)
-    servo.position(index=4, degrees=0)
-    servo.position(index=5, degrees=0)
-    servo.position(index=6, degrees=0)
-    servo.position(index=7, degrees=0)
-    servo.position(index=8, degrees=0)
-    utime.sleep(3)
-    servo.position(index=0, degrees=180)
-    servo.position(index=1, degrees=180)
-    servo.position(index=2, degrees=180)
-    servo.position(index=3, degrees=180)
-    servo.position(index=4, degrees=180)
-    servo.position(index=5, degrees=180)
-    servo.position(index=6, degrees=180)
-    servo.position(index=7, degrees=180)
-    servo.position(index=8, degrees=180)
-    utime.sleep(3)
-    servo.position(index=0, degrees=0)
-    servo.position(index=1, degrees=0)
-    servo.position(index=2, degrees=0)
-    servo.position(index=3, degrees=0)
-    servo.position(index=4, degrees=0)
-    servo.position(index=5, degrees=0)
-    servo.position(index=6, degrees=0)
-    servo.position(index=7, degrees=0)
-    servo.position(index=8, degrees=0)"""
-    
-    for i in range (0,180):
-        servo.position(index=0, degrees=i)
-        servo.position(index=1, degrees=i)
-        servo.position(index=2, degrees=i)
-        servo.position(index=3, degrees=i)
-        servo.position(index=4, degrees=i)
-        servo.position(index=5, degrees=i)
-        servo.position(index=6, degrees=i)
-        servo.position(index=7, degrees=i)
-        servo.position(index=8, degrees=i)
-        utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
-
-    utime.sleep(5)
-
-    for i in range (180,-1, -1):
-        servo.position(index=0, degrees=i)
-        servo.position(index=1, degrees=i)
-        servo.position(index=2, degrees=i)
-        servo.position(index=3, degrees=i)
-        servo.position(index=4, degrees=i)
-        servo.position(index=5, degrees=i)
-        servo.position(index=6, degrees=i)
-        servo.position(index=7, degrees=i)
-        servo.position(index=8, degrees=i)
-        utime.sleep(0.030)   # move 1 degree and wait 20 milliseconds, relatively slow and smooth operation
-  
-def ultra():
+def ultra1():
+    print('starting to measure uv sensor 1')
     us1_trigger.low()
     utime.sleep_us(2)
     us1_trigger.high()
@@ -126,11 +36,91 @@ def ultra():
     while us1_echo.value() == 1:
         signalon = utime.ticks_us()
     timepassed = signalon - signaloff
-    distance = (timepassed * 0.0343) / 2
-    if distance < 150:
-        enter_zone()
+    distance1 = (timepassed * 0.0343) / 2
+    print ('distance1',distance1)
+    return distance1
 
+def ultra2():
+    print('starting to measure uv sensor 2')
+    us2_trigger.low()
+    utime.sleep_us(2)
+    us2_trigger.high()
+    utime.sleep_us(5)
+    us2_trigger.low()
+    while us2_echo.value() == 0:
+        signaloff = utime.ticks_us()
+    while us2_echo.value() == 1:
+        signalon = utime.ticks_us()
+    timepassed = signalon - signaloff
+    distance2 = (timepassed * 0.0343) / 2
+    print ('distance2',distance2)
+    return distance2
+
+    
 while True:
-    ultra()#reads the ultrasonic sensors and starts functions accordingly
-    utime.sleep(1)
-
+    if ultra1()<50 or ultra2() < 50:
+        servo.position(index=0, degrees=180)
+        servo.position(index=1, degrees=180)
+        servo.position(index=2, degrees=180)
+        servo.position(index=3, degrees=180)
+        servo.position(index=4, degrees=180)
+        servo.position(index=5, degrees=180)
+        servo.position(index=6, degrees=180)
+        servo.position(index=7, degrees=180)
+        servo.position(index=8, degrees=180)
+        utime.sleep(10)
+        print('end phase 180')
+        
+    if ultra1()<50 or ultra2() < 50:
+        servo.position(index=0, degrees=0)
+        servo.position(index=1, degrees=0)
+        servo.position(index=2, degrees=0)
+        servo.position(index=3, degrees=0)
+        servo.position(index=4, degrees=0)
+        servo.position(index=5, degrees=0)
+        servo.position(index=6, degrees=0)
+        servo.position(index=7, degrees=0)
+        servo.position(index=8, degrees=0)
+        utime.sleep(10)
+        print('end phase 0 second time')
+        
+    if ultra1()<50 or ultra2() < 50:
+        servo.position(index=0, degrees=180)
+        utime.sleep(2)
+        servo.position(index=8, degrees=180)
+        utime.sleep(2)
+        servo.position(index=1, degrees=180)
+        utime.sleep(2)
+        servo.position(index=7, degrees=180)
+        utime.sleep(2)
+        servo.position(index=2, degrees=180)
+        utime.sleep(2)
+        servo.position(index=6, degrees=180)
+        utime.sleep(2)
+        servo.position(index=3, degrees=180)
+        utime.sleep(2)
+        servo.position(index=5, degrees=180)
+        utime.sleep(2)
+        servo.position(index=4, degrees=180)
+        utime.sleep(5)
+                
+    while ultra1() > 50 and ultra2() > 50:
+        #end position
+        servo.position(index=0, degrees=45)
+        utime.sleep(1)
+        servo.position(index=1, degrees=135)
+        utime.sleep(1)
+        servo.position(index=2, degrees=45)
+        utime.sleep(1)
+        servo.position(index=3, degrees=135)
+        utime.sleep(1)
+        servo.position(index=4, degrees=45)
+        utime.sleep(1)
+        servo.position(index=5, degrees=135)
+        utime.sleep(1)
+        servo.position(index=6, degrees=45)
+        utime.sleep(1)
+        servo.position(index=7, degrees=135)
+        utime.sleep(1)
+        servo.position(index=8, degrees=45)
+        utime.sleep(1)
